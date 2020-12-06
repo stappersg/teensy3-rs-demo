@@ -11,8 +11,7 @@ use teensy3::pins::{Pin, PinRow};
 use teensy3::bindings;
 
 fn setup() -> PinRow {
-    // It's unsafe because caller verifies that it's called only once
-    unsafe { PinRow::new_once() }
+    PinRow::new_once()
 }
 
 
@@ -20,7 +19,6 @@ fn setup() -> PinRow {
 pub extern fn main() {
     let mut pinrow = setup();
     let mut led = pinrow.get_led();
-    led.digital_write(false); // Set led off
     let mut i = 0;
 
     // Blink Loop
@@ -30,23 +28,28 @@ pub extern fn main() {
         println!("Hello! Count: {}", i);
         i += 1;
         // Show we are alive by blinking
-        alive(&mut led);
+        blink_safe(&mut led);
 
         // Keep 2 second pause in blinking the led, also don't spam the console
         delay(2000);
     }
 }
 
-/// Blink the light twice to know we're alive
-pub fn alive(led: &mut Pin) {
+/// Blink the light 10 times to know we're alive
+pub fn blink_safe(led: &mut Pin) {
     // Blink led with custom wrapper
-    for i in 0..10 {
-        led.digital_write(i%2 == 0);
+    for _ in 0..10 {
+        led.digital_write(true);
+        delay(50);
+        led.digital_write(false);
         delay(50);
     }
+}
+
+/// Blink the light 10 times to know we're alive
+pub fn blink_unsafe() {
     // Blink led with raw bindings
-    // (Safe wrapper is more recommended because it keep book what pins are in what state)
-    for _ in 0..5 {
+    for _ in 0..10 {
         unsafe{bindings::digitalWrite(13, bindings::HIGH as u8)};
         unsafe{bindings::delay(50)};
         unsafe{bindings::digitalWrite(13, bindings::LOW as u8)};
