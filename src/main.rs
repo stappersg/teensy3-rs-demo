@@ -7,7 +7,7 @@
 extern crate teensy3;
 
 use teensy3::util::{delay};
-use teensy3::pins::{PinMode, Pin, PinRow};
+use teensy3::pins::{Pin, PinRow};
 use teensy3::bindings;
 
 fn setup() -> PinRow {
