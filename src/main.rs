@@ -1,17 +1,18 @@
 #![no_std]
 #![no_main]
+#![deny(unused_must_use)]
+#![allow(clippy::needless_return)]
 
 #[macro_use]
 extern crate teensy3;
 
-use teensy3::serial::Serial;
 use teensy3::util::{delay};
 use teensy3::pins::{PinMode, Pin, PinRow};
 use teensy3::bindings;
 
 fn setup() -> PinRow {
     // It's unsafe because caller verifies that it's called only once
-    unsafe{PinRow::new_once()}
+    unsafe { PinRow::new_once() }
 }
 
 
@@ -20,7 +21,6 @@ pub extern fn main() {
     let mut pinrow = setup();
     let mut led = pinrow.get_led();
     led.digital_write(false); // Set led off
-    let ser = Serial{};
     let mut i = 0;
 
     // Blink Loop
