@@ -7,7 +7,7 @@ This fork is based on James Munns' [teensy3-rs-demo](https://github.com/jamesmun
 * Add [Cross](https://github.com/rust-embedded/cross) support alongside with Cargo. (Cross does compilation in Docker container.)
 * Support for Teensy 3.0-3.6
 * Reduce need for device specific configuration: Teensy model is only needed to be specified once in Makefile.
-* Place teensy3-rs crate in as a git sub module. Now library build process is easy to tweak as the crate is in the same directory.
+* Teensy3-rs crate is imported as a git sub module instead of external dependency. Now library build process is easy to tweak as the crate is in the same directory.
 * Other modification notes are listed in [teensy3-rs](https://github.com/tolvanea/teensy3-rs).
 
 ## Package manager
