@@ -5,7 +5,7 @@
 #MODEL=TEENSY31
 #MODEL=TEENSY32
 #MODEL=TEENSY35
-MODEL=TEENSY36
+#MODEL=TEENSY36
 
 # Package manager can be selected from Cargo or Cross.
 # Use Cargo only if you have installed all dependencies. Dependencies can be found from Dockerfile
